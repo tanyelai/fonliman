@@ -79,7 +79,8 @@ post("/api/funds/fonGnlBlgSiraliGetir", make_body("AOY"), "fonGnlBlgSiraliGetir 
 # 2) Allocation endpoint
 post("/api/funds/dagilimSiraliGetirT", make_body("AOY"), "dagilimSiraliGetirT — AOY (allocation)")
 
-# 3) Same for our other 5 funds — just to confirm consistency.
+# 3) Same call for a few more sample codes — just to confirm the response
+# shape is consistent across funds with different allocation profiles.
 for code in ["BDS", "PHE", "TP2", "YAY", "YZG"]:
     j = post("/api/funds/fonGnlBlgSiraliGetir", make_body(code), f"info — {code}")
     if j:

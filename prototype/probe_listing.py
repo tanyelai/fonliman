@@ -84,11 +84,13 @@ body = post(
 )
 show("Listing endpoint (full fund list)", body, sample=3)
 
-# Filter listing to our 6 funds (find them in the result, show what's there).
+# Filter listing down to a small sample so we can eyeball field shapes
+# without scrolling through 1000 rows. Pick any TEFAS codes you want here.
+SAMPLE_CODES = {"AOY", "BDS", "PHE", "TP2", "YAY", "YZG"}
 result = body.get("resultList") or []
-our = [r for r in result if r.get("fonKodu") in {"AOY", "BDS", "PHE", "TP2", "YAY", "YZG"}]
-print(f"\nOur 6 funds in listing: {len(our)} found")
-for r in our:
+sample = [r for r in result if r.get("fonKodu") in SAMPLE_CODES]
+print(f"\nSample funds found in listing: {len(sample)}")
+for r in sample:
     print(f"\n  {r.get('fonKodu')} — {r.get('fonUnvan', '?')}")
     print(f"    keys: {sorted(r.keys())}")
     print(f"    {pformat(r, width=110, sort_dicts=True)}")

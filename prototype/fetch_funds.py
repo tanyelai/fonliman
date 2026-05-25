@@ -1,9 +1,8 @@
 """TEFAS data-fetch prototype.
 
 Goal: validate that we can pull NAV history, fund metadata, and allocation
-breakdown for the six example fund codes the user already follows. Print the
-shape and contents so we can design the schema and UX from real data, not
-guesswork.
+breakdown for a handful of sample fund codes. Print the shape and contents so
+we can design the schema and UX from real data, not guesswork.
 """
 
 from __future__ import annotations
@@ -14,6 +13,9 @@ from pprint import pformat
 
 from tefas import Crawler
 
+# Sample TEFAS codes picked to cover different allocation profiles (foreign
+# equity, money market, gold, etc.) — substitute any TEFAS codes you want to
+# probe. Not investment guidance, just convenient examples for testing.
 CODES = ["AOY", "BDS", "PHE", "TP2", "YAY", "YZG"]
 
 # TEFAS publishes the day's NAV in the evening. Today (Sun 2026-05-24) is a
@@ -66,7 +68,7 @@ def main() -> None:
         latest_alloc = {k: (v.isoformat() if hasattr(v, "isoformat") else v) for k, v in latest_alloc.items()}
         print(f"Latest row:\n{pformat(latest_alloc, width=100, sort_dicts=False)}")
 
-    banner("CATEGORY DISCOVERY — what categories do our 6 funds belong to?")
+    banner("CATEGORY DISCOVERY — what categories do these 6 funds belong to?")
     # Look at the 'title' column and any category-like fields.
     for code in CODES:
         df = crawler.fetch(

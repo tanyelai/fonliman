@@ -1,6 +1,6 @@
 [project]
 name = "fonliman"
-version = "0.1.0"
+version = "0.1.1"
 description = "Tek ekranda izlediğin TEFAS fonlarını takip et."
 requires-python = ">=3.11"
 license = { file = "../LICENSE" }

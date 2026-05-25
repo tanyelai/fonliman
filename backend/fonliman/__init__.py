@@ -6,4 +6,4 @@ triggering app startup. This matters for tests and scripts that exercise the
 TEFAS client in isolation.
 """
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"

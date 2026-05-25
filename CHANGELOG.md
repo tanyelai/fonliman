@@ -5,6 +5,16 @@ Dikkat çekici tüm değişiklikler burada.
 Format [Keep a Changelog](https://keepachangelog.com/) standardını,
 sürüm numaralandırma [Semantic Versioning](https://semver.org/)'ı izler.
 
+## [0.1.1] — 2026-05-25
+
+Küçük doküman güncellemesi — yeni okuyucunun "bu benim için mi?" sorusuna
+30 saniyede cevap bulması için README'deki motivasyon bölümü genişletildi.
+
+### Değişenler
+
+- README'ye **"Neden yazdım?"** bölümü genişletildi: TEFAS sitesinde tek-tek tıklama, telefondan sırayla bakma, Excel'de manuel veri tutma gibi mevcut yolların yetersizliği. "Apple Stocks'un Türk yatırım fonları için karşılığı" hedefi.
+- **"Ne değil?"** alt-bölümü eklendi: kar/zarar takip aracı değil, AI fon önericisi değil, çoklu kullanıcı platformu değil. Ürünün sınırlarını net çiziyor, beklenti yönetimi yapıyor.
+
 ## [0.1.0] — 2026-05-25
 
 İlk public sürüm. Takip ettiğin TEFAS fonlarını tek dashboard'da
@@ -67,4 +77,5 @@ görselleştirir.
 - **Otomatik test suite** yok — manuel end-to-end Playwright doğrulamaları var
 - **i18n** yok — sadece Türkçe
 
+[0.1.1]: https://github.com/tanyelai/fonliman/releases/tag/v0.1.1
 [0.1.0]: https://github.com/tanyelai/fonliman/releases/tag/v0.1.0

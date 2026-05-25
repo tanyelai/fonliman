@@ -30,7 +30,7 @@ INFO="$LAUNCHER_DIR/fonliman.app/Contents/Info.plist"
 defaults write "$INFO" CFBundleIdentifier      io.fonliman.launcher
 defaults write "$INFO" CFBundleName            fonliman
 defaults write "$INFO" CFBundleDisplayName     fonliman
-defaults write "$INFO" CFBundleShortVersionString 0.1.0
+defaults write "$INFO" CFBundleShortVersionString 0.1.1
 
 # 4) Install the icon if it exists (build.sh doesn't render — see README).
 if [ -f "$LAUNCHER_DIR/fonliman.icns" ]; then

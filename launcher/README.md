@@ -1,32 +1,36 @@
 # macOS launcher
 
-Spotlight-aranabilir `fonliman.app` üretir. Çift tıklayınca:
+Spotlight'tan aratılabilen `fonliman.app` üretir. Çift tıklayınca:
 
-1. Docker Desktop kapalıysa açar, daemon hazır olana kadar bekler (≤90 s)
+1. Docker Desktop kapalıysa açar, daemon hazır olana kadar bekler (90 saniyeye kadar)
 2. `docker compose up -d` ile container'ı kaldırır
 3. `/api/health` cevap verene kadar bekler
-4. `http://localhost:8765` adresini default browser'da açar
+4. `http://localhost:8765` adresini varsayılan tarayıcıda açar
 
 ## Kurulum
+
+Normal akış: repo kökünden `bash setup.sh` çalıştır — launcher otomatik
+kurulur. Sadece launcher'ı yeniden derlemek istersen:
 
 ```bash
 bash launcher/build.sh
 ```
 
 Bu komut:
-- `fonliman.applescript` şablonuna repo'nun yolunu gömer
-- `osacompile` ile `.app` bundle'ı üretir
-- Info.plist'i (CFBundleName, bundle id, sürüm) doldurur
-- Varsa `fonliman.icns` ikonunu yerleştirir
-- Sonucu `/Applications/fonliman.app` olarak kurar
-- LaunchServices'i refreshler
 
-Tek seferlik — repoyu taşırsan tekrar çalıştır.
+- `fonliman.applescript` şablonuna repo yolunu gömer
+- `osacompile` ile `.app` paketini üretir
+- Info.plist alanlarını (CFBundleName, bundle id, sürüm) doldurur
+- Varsa `fonliman.icns` ikonunu yerine kopyalar
+- Sonucu `/Applications/fonliman.app` olarak kurar
+- LaunchServices önbelleğini yeniler
+
+Tek seferlik bir iş — repoyu başka bir klasöre taşırsan tekrar çalıştırman gerek.
 
 ## İkonu yeniden üretmek (opsiyonel)
 
-`fonliman.icns` repo'ya commit edilmiş. Logoyu değiştirirsen
-`frontend/public/favicon.svg`'i güncelle ve repo kökünden şu komutu çalıştır:
+`fonliman.icns` zaten repo'da. Logoyu değiştirirsen `frontend/public/favicon.svg`'i
+güncelle ve repo kökünden şunu çalıştır:
 
 ```bash
 prototype/.venv/bin/python -c "
@@ -52,11 +56,11 @@ iconutil -c icns launcher/fonliman.iconset -o launcher/fonliman.icns
 bash launcher/build.sh
 ```
 
-## Bir sorun varsa
+## Sorun çıkarsa
 
-| Belirti | Yapılacak |
+| Belirti | Çözüm |
 |---|---|
-| "Docker Desktop bulunamadı" | Önce Docker Desktop'ı App Store / docker.com'dan kurup bir kez aç |
-| Cmd+Space'te `fonliman` çıkmıyor | `lsregister -f /Applications/fonliman.app` (build.sh zaten yapıyor) |
-| Browser açılıyor ama "bağlantı reddedildi" | `docker logs fonliman` ile container loglarını bak |
-| Logoyu değiştirdim ama Finder eski ikonu gösteriyor | `touch /Applications/fonliman.app` + Finder restart |
+| "Docker Desktop bulunamadı" | Önce Docker Desktop'ı kur (docker.com) ve bir kez aç |
+| Spotlight'ta `fonliman` çıkmıyor | `lsregister -f /Applications/fonliman.app` (build.sh zaten yapıyor) |
+| Tarayıcı açılıyor ama "bağlantı reddedildi" diyor | `docker logs fonliman` ile log'lara bak |
+| Logo'yu değiştirdim, Finder eskisini gösteriyor | `touch /Applications/fonliman.app` + Finder'ı yeniden başlat |

@@ -1,77 +1,77 @@
-# Katkıda bulunma rehberi
+# Katkı rehberi
 
-`fonliman`'a katkı için teşekkürler! Hem bug raporları, hem özellik önerileri, hem
-de kod katkıları bekleniyor. Bu dosya nereye ne yazacağını ve nasıl PR
-açacağını anlatır.
+`fonliman`'a katkıda bulunmak istediğin için teşekkürler. Bug bildirimi de,
+özellik önerisi de, kod katkısı da memnuniyetle karşılanır. Bu dosya nereye
+ne yazacağını ve nasıl PR açacağını anlatır.
 
 _Contributions welcome. This guide covers issue filing, dev setup, code
 conventions and the PR flow. Comments and commits can be in Turkish or
-English — both are accepted._
+English — both are fine._
 
-## Bir bug buldun mu?
+## Bug buldun mu?
 
 [GitHub Issues](https://github.com/tanyelai/fonliman/issues)'a aç:
 
-- **Ne yaptın** (reprodüksiyon adımları — "AOY fonunu ekledim, …")
-- **Ne bekliyordun** vs **ne oldu**
-- Mümkünse ekran görüntüsü
-- Console log'u (`docker logs fonliman` veya browser DevTools)
-- Çalıştığın platform (macOS sürümü, Docker sürümü, browser)
+- **Ne yaptın** — adım adım nasıl tekrarlanır ("AOY fonunu ekledim, sonra…")
+- **Ne bekliyordun**, **ne oldu**
+- Mümkünse bir ekran görüntüsü
+- Console log'u (`docker logs fonliman` veya tarayıcı DevTools)
+- Platform bilgisi (macOS sürümü, Docker sürümü, tarayıcı)
 
-## Bir özellik mi öneriyorsun?
+## Yeni bir özellik öneriyor musun?
 
-Yine [Issues](https://github.com/tanyelai/fonliman/issues)'a aç ama önce yol haritasını
-([README'deki "Yol haritası"](README.md#yol-haritası)) bir tara — zaten planlanmış olabilir. Plan'da yoksa:
+Yine [Issues](https://github.com/tanyelai/fonliman/issues)'a aç ama önce
+[README'deki yol haritasını](README.md#yol-haritası) bir gözden geçir —
+zaten planlanmış olabilir. Yoksa şunlara değin:
 
 - Hangi problemi çözüyor?
-- Hangi kullanıcı senaryosunda ortaya çıkıyor?
-- Alternatif çözüm düşündün mü?
+- Hangi senaryoda ortaya çıkıyor?
+- Başka çözüm yolu düşündün mü?
 
-Küçük (UX iyileştirmesi, copy düzeltmesi) için doğrudan PR de olur — issue
-açmadan.
+UX değişikliği, yazım düzeltmesi gibi küçük şeyler için doğrudan PR de
+açabilirsin — issue açmak şart değil.
 
 ## Geliştirme ortamı
 
-### Gereksinimler
+### Gerekenler
 
 - **Python 3.11+** (3.13 önerilir)
 - **Node 20+**
-- **uv** (Python venv yönetimi için tavsiye, opsiyonel)
-- **Docker** (üretim build'i test etmek için, geliştirme için zorunlu değil)
+- **uv** (Python venv için kolaylık, opsiyonel)
+- **Docker** (üretim build'ini test etmek için — geliştirme için zorunlu değil)
 
-### Backend kurulumu
+### Backend
 
 ```bash
 git clone https://github.com/tanyelai/fonliman.git
 cd fonliman
 
-# Python venv ve bağımlılıklar
 cd backend
 uv venv && source .venv/bin/activate
 uv pip install fastapi 'uvicorn[standard]' apscheduler requests pydantic holidays
 
-# Backend'i ayağa kaldır (frontend dev server için 5173'e ayarlı, yine 8765'te çalışır)
 PYTHONPATH=. uvicorn fonliman.main:app --reload --port 8765
 ```
 
-Veritabanı `./data/fonliman.db`'de oluşur (ilk açılışta).
+İlk açılışta `./data/fonliman.db` oluşur.
 
-### Frontend kurulumu
+### Frontend
 
 ```bash
 cd frontend
 npm install
-npm run dev  # Vite dev server :5173'te
+npm run dev   # Vite dev server :5173'te
 ```
 
-Vite, `/api/*` çağrılarını `localhost:8765`'teki backend'e proxy'ler. `http://localhost:5173`'i aç, hot-reload ile geliştir.
+Vite, `/api/*` isteklerini `localhost:8765`'teki backend'e proxy'liyor.
+`http://localhost:5173`'i aç, hot-reload ile geliştir.
 
-### Tam build (production gibi)
+### Tam build (üretim gibi)
 
 ```bash
 cd frontend && npm run build       # → ../backend/fonliman/static
 cd ../backend && PYTHONPATH=. python -m fonliman
-# Veya:
+# Ya da:
 docker compose up -d --build
 ```
 
@@ -81,19 +81,20 @@ docker compose up -d --build
 fonliman/
 ├── backend/fonliman/
 │   ├── tefas.py     # TEFAS HTTP client + allocation field mapping
-│   ├── db.py        # SQLite schema + DAO
-│   ├── sync.py      # 3-trigger sync engine + APScheduler
-│   ├── main.py      # FastAPI app + routes
-│   ├── config.py    # env var configuration
+│   ├── db.py        # SQLite şeması + DAO
+│   ├── sync.py      # Üç tetikleyicili sync engine + APScheduler
+│   ├── main.py      # FastAPI uygulaması + rotalar
+│   ├── config.py    # env var yapılandırması
 │   └── __main__.py  # uvicorn entry point
 ├── frontend/src/
 │   ├── pages/       # Dashboard.tsx, FundDetail.tsx
-│   ├── components/  # Header, GroupCard, FundRow, Sparkline, StatBox, modals
+│   ├── components/  # Header, GroupCard, FundRow, Sparkline, StatBox, modallar
 │   ├── lib/         # api.ts, types.ts, format.ts
 │   └── App.tsx, main.tsx, index.css
-├── launcher/        # macOS .app launcher (Spotlight integration)
+├── launcher/        # macOS .app launcher (Spotlight entegrasyonu)
 ├── docs/            # README ekran görüntüleri
-├── prototype/       # TEFAS API keşif scriptleri (eğitici referans)
+├── prototype/       # TEFAS API keşif scriptleri (eğitim amaçlı referans)
+├── setup.sh         # Tek komutla kurulum
 └── Dockerfile, docker-compose.yml
 ```
 
@@ -101,65 +102,66 @@ fonliman/
 
 ### Python
 
-- **Type hints zorunlu** — `from __future__ import annotations` her dosyada.
-- **PEP 8** + 100 sütun.
-- **Docstring**: "WHY" + "HOW" + non-obvious caveats. "WHAT" zaten kodun kendisi.
-- **Hata yönetimi**: TEFAS'tan gelen veri kirli olabilir — düzgün rakam değilse satırı sessizce skip et, sync'i kıllanma.
+- **Type hint zorunlu** — `from __future__ import annotations` her dosyada
+- **PEP 8** + 100 sütun
+- **Docstring**: NEDEN + NASIL + obvious olmayan tuzaklar. NE-YAPTIĞI zaten kodun kendisinde
+- **Hata toleransı**: TEFAS'tan gelen veri pislik içerebilir — kullanılabilir değilse satırı sessizce skip et, sync'i kıllanma
 
 ### TypeScript / React
 
-- **Functional components + hooks**, class component yok.
-- **SWR** sunucu state'i için (Redux/Zustand kullanmıyoruz).
-- **Tailwind utility classes**. Custom CSS sadece `.card`, `.btn`, `.pill` gibi semantic component'ler için (`index.css`).
-- **Türkçe arayüz metni** — `i → İ` problemini önlemek için `text-transform: uppercase` yerine Title Case kullan.
-- **Tabular figures** sayı kolonlarında (`tabular` className).
-- **Akıllı boşluk** — Apple-like UX = bol whitespace, subtle border, az renk.
+- **Functional component + hooks**, class component yok
+- **SWR** server state için (Redux/Zustand kullanmıyoruz)
+- **Tailwind utility class'ları**. Custom CSS sadece `.card`, `.btn`, `.pill` gibi semantik bileşenler için (`index.css`)
+- **Türkçe arayüz metni** — Tailwind'in `uppercase` class'ı Türkçe'de `i → I` problemini yaratır; bunun yerine Title Case kullan
+- **Tabular figures** sayı kolonlarında (`tabular` className)
+- **Cömert boşluk** — Apple-tarzı = bol whitespace, nazik border, az renk
 
 ### Commit mesajları
 
-[Conventional Commits](https://www.conventionalcommits.org/) önerilir ama zorunlu değil:
+[Conventional Commits](https://www.conventionalcommits.org/) tavsiye edilir
+ama zorunlu değil:
+
+```
+feat: detay sayfasına benchmark karşılaştırma grafiği eklendi
+fix: price-only sync investor_count'ü silmesin
+docs: TEFAS rate-limit davranışını README'de netleştir
+refactor: sparkline'ı paylaşımlı bileşene çıkar
+```
+
+İngilizce de OK:
 
 ```
 feat: add benchmark comparison chart on detail page
 fix: nav_history upsert preserves investor_count on price-only refresh
-docs: clarify TEFAS rate-limit behavior in README
-refactor: extract sparkline rendering into a shared component
 ```
 
-Türkçe de OK:
-
-```
-feat: detay sayfasında benchmark karşılaştırma grafiği eklendi
-fix: price-only sync'te investor_count silinmesin
-```
-
-## Pull request akışı
+## PR akışı
 
 1. **Fork + branch**: `git checkout -b feature/benchmark-karsilastirma`
-2. **Küçük tut**: 200-400 satır altı PR'lar daha hızlı review olur. Birden çok konuyu tek PR'da paketleme.
+2. **Küçük tut**: 200-400 satır altı PR'lar hızlı incelenir. Birden çok konuyu tek PR'da paketleme
 3. **Test et**:
-   - Backend: en az `python -c "from fonliman.tefas import TefasClient; TefasClient().list_funds()"` ile import sağlam
-   - Frontend: `npm run build` hatasız
-   - Tam build: `docker compose up -d --build` ile container sağlıklı (`docker ps` → `healthy`)
-4. **Screenshot ekle** UI değişikliklerine
-5. **PR aç** — açıklamaya: ne değişti, neden, ekran görüntüsü (UI ise)
+   - Backend: en azından `python -c "from fonliman.tefas import TefasClient; TefasClient().list_funds()"` ile import sağlam mı bak
+   - Frontend: `npm run build` hatasız mı
+   - Tam build: `docker compose up -d --build` ile container sağlıklı mı (`docker ps` → `healthy`)
+4. **UI değişikliği yapıyorsan ekran görüntüsü ekle**
+5. **PR aç** — açıklamada ne değişti, neden, ekran görüntüsü (UI ise)
 
-Henüz formal test suite yok. `pytest` / `vitest` eklemek isteyen olursa kabul.
+Henüz otomatik test suite yok. `pytest` ve `vitest` eklemek isteyene açığım.
 
-## Bir alana yardım istenenler (good first issues)
+## Yardım istenen alanlar (good first issues)
 
 - **Test suite** — backend için pytest, frontend için vitest + react-testing-library
 - **CI** — GitHub Actions: Docker build + smoke test
-- **Linting** — `ruff` Python için, `eslint` + `prettier` TS için
-- **Mobile breakpoint** — dashboard'ı küçük ekranlara optimize et
+- **Linting** — Python için `ruff`, TS için `eslint` + `prettier`
+- **Mobile breakpoint** — paneli küçük ekranlara uydur
 - **i18n** — şu an Türkçe-sabit; en azından bir EN locale eklemek
 - **Code splitting** — frontend bundle 666 KB; Recharts'ı async import et
-- **Allocation code mapping** — `backend/fonliman/tefas.py`'deki `ALLOCATION_LABELS` "best-effort" — bazı kodlar henüz mapping'siz, daha doğru Türkçe etiketler bul
+- **Allocation kod mapping** — `backend/fonliman/tefas.py`'deki `ALLOCATION_LABELS` "best-effort"; bazı kodlar henüz eşleşmemiş, daha doğru Türkçe etiket bulabilirsin
 
-İlgini çeken bir başlık varsa issue aç, "I want to take this" diye yaz, başla.
+İlgini çeken bir başlık varsa issue aç, "Ben bunu üstleniyorum" diye yaz, başla.
 
-## Soruların mı var?
+## Sorun mu var?
 
-[GitHub Discussions](https://github.com/tanyelai/fonliman/discussions) (varsa) veya yeni bir issue.
+[GitHub Discussions](https://github.com/tanyelai/fonliman/discussions) (henüz açıksa) ya da yeni bir issue.
 
 Teşekkürler! 🙏

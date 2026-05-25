@@ -66,4 +66,4 @@ fonlarını tek dashboard'da görselleştirir.
 - **Test suite** — Henüz formal otomasyon testi yok. Manuel end-to-end Playwright doğrulamaları var.
 - **i18n** — Sadece Türkçe.
 
-[0.1.0]: https://github.com/tanyelai/tefas/releases/tag/v0.1.0
+[0.1.0]: https://github.com/tanyelai/fonliman/releases/tag/v0.1.0

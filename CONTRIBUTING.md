@@ -10,7 +10,7 @@ English — both are accepted._
 
 ## Bir bug buldun mu?
 
-[GitHub Issues](https://github.com/tanyelai/tefas/issues)'a aç:
+[GitHub Issues](https://github.com/tanyelai/fonliman/issues)'a aç:
 
 - **Ne yaptın** (reprodüksiyon adımları — "AOY fonunu ekledim, …")
 - **Ne bekliyordun** vs **ne oldu**
@@ -20,7 +20,7 @@ English — both are accepted._
 
 ## Bir özellik mi öneriyorsun?
 
-Yine [Issues](https://github.com/tanyelai/tefas/issues)'a aç ama önce yol haritasını
+Yine [Issues](https://github.com/tanyelai/fonliman/issues)'a aç ama önce yol haritasını
 ([README'deki "Yol haritası"](README.md#yol-haritası)) bir tara — zaten planlanmış olabilir. Plan'da yoksa:
 
 - Hangi problemi çözüyor?
@@ -42,8 +42,8 @@ açmadan.
 ### Backend kurulumu
 
 ```bash
-git clone https://github.com/tanyelai/tefas.git
-cd tefas
+git clone https://github.com/tanyelai/fonliman.git
+cd fonliman
 
 # Python venv ve bağımlılıklar
 cd backend
@@ -160,6 +160,6 @@ Henüz formal test suite yok. `pytest` / `vitest` eklemek isteyen olursa kabul.
 
 ## Soruların mı var?
 
-[GitHub Discussions](https://github.com/tanyelai/tefas/discussions) (varsa) veya yeni bir issue.
+[GitHub Discussions](https://github.com/tanyelai/fonliman/discussions) (varsa) veya yeni bir issue.
 
 Teşekkürler! 🙏

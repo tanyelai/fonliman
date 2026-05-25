@@ -41,7 +41,7 @@ sorduğun sorular daha basit:
 ### Docker (her platform)
 
 ```bash
-git clone https://github.com/tanyelai/tefas.git fonliman
+git clone https://github.com/tanyelai/fonliman.git
 cd fonliman
 docker compose up -d
 open http://localhost:8765

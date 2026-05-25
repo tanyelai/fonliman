@@ -1,0 +1,62 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-feature-settings: "tnum" 1, "cv11" 1, "ss01" 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply font-sans text-ink-900 dark:text-ink-100;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Tabular figures for any number that lives in a column. Apply via
+     `.tabular` rather than globally so prose stays proportional. */
+  .tabular {
+    font-variant-numeric: tabular-nums slashed-zero;
+  }
+}
+
+@layer components {
+  .card {
+    @apply bg-white dark:bg-ink-900 rounded-2xl
+           border border-ink-200/70 dark:border-ink-800/70;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-1.5
+           px-3 py-1.5 rounded-lg text-sm font-medium
+           transition-colors duration-150
+           focus-visible:outline-none focus-visible:ring-2
+           focus-visible:ring-ink-400 dark:focus-visible:ring-ink-600
+           disabled:opacity-40 disabled:cursor-not-allowed;
+  }
+
+  .btn-primary {
+    @apply bg-ink-900 text-white hover:bg-ink-700
+           dark:bg-ink-100 dark:text-ink-900 dark:hover:bg-ink-300;
+  }
+
+  .btn-ghost {
+    @apply text-ink-600 dark:text-ink-400
+           hover:bg-ink-100 dark:hover:bg-ink-800;
+  }
+
+  .pill {
+    @apply inline-flex items-center px-1.5 py-0.5
+           rounded-md text-[11px] font-medium tabular;
+  }
+}
+
+/* Recharts default colours look anaemic in dark mode. Override the axis
+   text fill via CSS so charts stay legible. */
+.recharts-cartesian-axis-tick-value {
+  @apply fill-ink-500 dark:fill-ink-500;
+}
+.recharts-tooltip-wrapper {
+  outline: none;
+}

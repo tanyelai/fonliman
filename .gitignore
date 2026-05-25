@@ -216,3 +216,35 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# --- fonliman additions ---
+# Node modules and Vite build output
+node_modules/
+frontend/dist/
+# Built static assets get rebuilt by `npm run build` or the Dockerfile.
+backend/fonliman/static/
+
+# SQLite database files
+data/
+*.db
+*.db-wal
+*.db-shm
+
+# Local prototype scaffolding (kept in-tree but its venv and screenshots
+# don't belong in git)
+prototype/.venv/
+prototype/screens/
+
+# Local env overrides (e.g. PORT, FONLIMAN_SYNC_HOUR)
+.env
+.env.local
+*.log
+
+# TS/Vite build artifacts that shouldn't land in the source tree
+frontend/src/**/*.js
+frontend/tsconfig.tsbuildinfo
+
+# launcher build artifacts — produced by `bash launcher/build.sh`
+launcher/fonliman.app/
+launcher/fonliman.compiled.applescript
+launcher/fonliman.iconset/

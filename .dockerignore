@@ -1,0 +1,36 @@
+# Keep the build context lean — anything in here gets streamed to the
+# Docker daemon during `docker build` even if the Dockerfile never reads it.
+
+# Virtualenvs and caches
+**/.venv/
+**/__pycache__/
+**/*.pyc
+**/.pytest_cache/
+**/.mypy_cache/
+**/.ruff_cache/
+
+# Node build artefacts (we copy package.json + lockfile inside Dockerfile,
+# Docker rebuilds node_modules fresh inside the image)
+**/node_modules/
+**/dist/
+
+# Pre-built frontend assets (the Dockerfile produces these in stage 1)
+backend/fonliman/static/
+
+# Local runtime data
+data/
+*.db
+*.db-wal
+*.db-shm
+
+# Exploration scaffolding from the API discovery phase — not needed in image
+prototype/
+
+# IDE / OS noise
+.vscode/
+.idea/
+.DS_Store
+
+# Git
+.git/
+.gitignore

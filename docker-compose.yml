@@ -1,0 +1,19 @@
+services:
+  fonliman:
+    build: .
+    image: fonliman:latest
+    container_name: fonliman
+    restart: unless-stopped
+    ports:
+      # PORT defaults to 8765; override in .env or shell env to remap.
+      - "${PORT:-8765}:8765"
+    volumes:
+      - ./data:/data
+    environment:
+      # Internal port the FastAPI server binds to. Don't change unless you
+      # also change the second number in the `ports` mapping above.
+      - PORT=8765
+      # When the daily sync fires (Istanbul time). Defaults to 22:30 — TEFAS
+      # has published the day's NAV by then.
+      - FONLIMAN_SYNC_HOUR=${FONLIMAN_SYNC_HOUR:-22}
+      - FONLIMAN_SYNC_MINUTE=${FONLIMAN_SYNC_MINUTE:-30}

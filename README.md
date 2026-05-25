@@ -15,15 +15,27 @@ Veri senin makinende durur, hesap istemez, ücret istemez.
 
 ## Neden yazdım?
 
-TEFAS'ta birden çok fonu takip ediyorsan, her birine ayrı ayrı bakmak gerek.
-Soru basit aslında:
+TEFAS'ta birkaç fon takip ediyordum. İhtiyacım her gün karmaşık analiz
+yapmak değildi, sadece **"fonlarım ne yapıyor?"** sorusuna 30 saniyede cevap
+bulmaktı.
 
-- Bugün portföyüm ne durumda?
-- Hangi fonum kategorisinde nerede?
-- Yatırımcı sayısı, fon büyüklüğü nasıl evrildi?
-- Bu fon hangi varlıkları tutuyor — hisse mi, repo mu, altın mı?
+Mevcut yollar yetersizdi:
 
-`fonliman` bu sorulara tek bakışta cevap verir.
+- **TEFAS sitesinde** — her fonu tek tek aç, yukarı aşağı kaydır, gör. 6 fon = 6 sekme.
+- **Telefondan Midas vb.** — küçük ekran, fon fon sırayla bakıyorsun. Portföyün tamamını tek bakışta göremiyorsun.
+- **Excel'de** — veri manuel, güncel tutmak iş çıkarıyor.
+
+Aradığım şey: **Apple Stocks'un Türk yatırım fonları için karşılığı.** Sade,
+hızlı, "tek bakış, hepsi orada". Veri arka planda kendi gelsin, ben sadece
+izleyeyim.
+
+Bulamayınca yazdım. Senin de durumun benzerse buyur, kullan.
+
+### Ne **değil**?
+
+- **Kar/zarar takip aracı değil.** Cost basis girmiyorsun, kar/zarar hesaplamıyor. Sadece fonun nasıl gittiğini gösteriyor.
+- **AI fon önericisi değil.** Hangi fonu almalısın söylemiyor — hangi fonu **izleyeceğine** sen karar veriyorsun.
+- **Çoklu kullanıcı / SaaS platform değil.** Sen, tek başına, kendi makinende.
 
 ## Özellikler
 
